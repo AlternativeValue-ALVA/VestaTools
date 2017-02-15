@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#THIS SCRIPT IS FROM THE GWIDDLE VESTATOOLS PACKAGE.
+#REPORT ISSUES AT https://github.com/Gwiddle/VestaTools
+
+#SYNTAX - v-restore-all
+#Restores all user backup files in /backup. Helpful for server moves.
+
+
+for X in /backup/*; do
+    rm -rf /backup/tmp.*
+    user=$(echo ${X:8:-15} | cut -f1 -d".")
+    file=${X:8}
+    echo "=== Restoring user $user - $file ==="
+    /usr/local/vesta/bin/v-restore-user $user $file
+done
